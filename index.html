@@ -503,7 +503,23 @@ tbody tr:hover td { background: #fafafa; }
 <!-- QRious for generating QR codes -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 <!-- jsQR for decoding QR codes from camera -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.js"></script>
+<script>
+(function(){
+  var urls=[
+    'https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.js',
+    'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js',
+    'https://unpkg.com/jsqr@1.4.0/dist/jsQR.js'
+  ];
+  function load(i){
+    if(i>=urls.length)return;
+    var s=document.createElement('script');
+    s.src=urls[i];
+    s.onerror=function(){load(i+1);};
+    document.head.appendChild(s);
+  }
+  load(0);
+})();
+</script>
 
 <!-- Firebase SDK -->
 <script type="module">
@@ -690,11 +706,20 @@ window.toggleCam = function() { if (camLive) stopCam(); else startCam(); }
 
 window.startCam = async function() {
   try {
-    stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: {ideal:'environment'}, width:{ideal:1280}, height:{ideal:720} }
-    });
+    // Try rear camera, fall back to any available camera
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } });
+    } catch(_) {
+      stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    }
     const v = document.getElementById('sv');
-    v.srcObject = stream; await v.play(); v.style.display = 'block';
+    v.srcObject = stream;
+    v.style.display = 'block';
+    await new Promise((res,rej)=>{
+      v.onloadedmetadata = ()=>{ v.play().then(res).catch(rej); };
+      v.onerror = rej;
+      setTimeout(rej, 8000);
+    });
     camLive = true; processing = false; cooldown = false;
     document.getElementById('camStart').style.display = 'none';
     document.getElementById('vignette').style.display = 'block';
@@ -703,15 +728,17 @@ window.startCam = async function() {
     document.getElementById('btnCam').classList.add('live');
     setStatus('scanning','Scanning for QR code…');
     document.getElementById('laser').classList.add('active');
-    raf = requestAnimationFrame(loop);
+    // setInterval is more reliable than rAF on mobile browsers
+    raf = setInterval(scanFrame, 150);
   } catch(e) {
     toast('Camera error: ' + e.message, 'err');
+    setStatus('idle','Camera error — check permissions');
   }
 }
 
 function stopCam() {
   camLive = false; processing = false; cooldown = false;
-  if (raf) { cancelAnimationFrame(raf); raf = null; }
+  if (raf) { clearInterval(raf); raf = null; }
   if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
   const v = document.getElementById('sv');
   if (v) { v.srcObject = null; v.style.display = 'none'; }
@@ -731,26 +758,28 @@ function setStatus(type, msg) {
   el.textContent = msg;
 }
 
-function loop(ts) {
-  if (!camLive) return;
-  raf = requestAnimationFrame(loop);
-  if (ts - lastFrame < 33) return; // ~30fps
-  lastFrame = ts;
-  if (processing || cooldown) return;
+function scanFrame() {
+  if (!camLive || processing || cooldown) return;
   const v = document.getElementById('sv'), c = document.getElementById('sc');
-  if (!v || v.readyState < 2 || v.videoWidth === 0) return;
-  c.width = v.videoWidth; c.height = v.videoHeight;
-  const ctx = c.getContext('2d', {willReadFrequently:true});
-  ctx.drawImage(v, 0, 0);
-  if (typeof jsQR === 'undefined') return;
-  const img = ctx.getImageData(0, 0, c.width, c.height);
-  const code = jsQR(img.data, img.width, img.height, {inversionAttempts:'dontInvert'});
-  if (code && code.data && code.data.startsWith('TKT-')) {
-    processing = true;
-    flashFinder();
-    validate(code.data.trim());
-  }
+  if (!v || v.readyState < 2 || v.videoWidth === 0 || v.paused) return;
+  try {
+    c.width = v.videoWidth; c.height = v.videoHeight;
+    const ctx = c.getContext('2d', {willReadFrequently:true});
+    ctx.drawImage(v, 0, 0, c.width, c.height);
+    if (typeof jsQR === 'undefined') { setStatus('scanning','Loading scanner...'); return; }
+    const img = ctx.getImageData(0, 0, c.width, c.height);
+    const code = jsQR(img.data, img.width, img.height, {inversionAttempts:'attemptBoth'});
+    if (code && code.data) {
+      const id = code.data.trim();
+      if (id.startsWith('TKT-')) {
+        processing = true;
+        flashFinder();
+        validate(id);
+      }
+    }
+  } catch(e) { /* silent, keep scanning */ }
 }
+function loop() {}
 
 function flashFinder() {
   const f = document.getElementById('finder'), l = document.getElementById('laser');
