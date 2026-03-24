@@ -244,35 +244,38 @@ tbody tr:hover td{background:rgba(255,255,255,.02);}
 .toast.warn{background:#2d1a00;border-color:rgba(251,191,36,.3);color:#fbbf24;}
 
 @media print{
+  @page{
+    size:A4 landscape;
+    margin:10mm;
+  }
   *{margin:0 !important;padding:0 !important;box-sizing:border-box !important;}
   html,body{
     background:#fff !important;
     height:auto !important;
     overflow:visible !important;
+    width:100% !important;
   }
-  /* Hide absolutely everything */
   body > *{display:none !important;}
-  /* Then show ONLY the preview modal */
   #previewBg{
-    display:flex !important;
-    position:fixed !important;
-    inset:0 !important;
+    display:block !important;
+    position:static !important;
     background:#fff !important;
-    align-items:center !important;
-    justify-content:center !important;
-    padding:20px !important;
-    backdrop-filter:none !important;
+    padding:0 !important;
+    width:100% !important;
   }
   .modal{
     border:none !important;
     box-shadow:none !important;
     background:transparent !important;
+    width:100% !important;
     max-width:100% !important;
-    width:auto !important;
     border-radius:0 !important;
   }
   .modal-hdr,.modal-foot{display:none !important;}
-  .modal-body{padding:0 !important;}
+  .modal-body{
+    padding:0 !important;
+    width:100% !important;
+  }
   .preview-wrap{
     background:#fff !important;
     border:none !important;
@@ -280,17 +283,62 @@ tbody tr:hover td{background:rgba(255,255,255,.02);}
     border-radius:0 !important;
     display:flex !important;
     justify-content:center !important;
+    align-items:center !important;
+    width:100% !important;
+    min-height:0 !important;
   }
+  /* Scale ticket to fill A4 landscape width */
   .tkt{
-    box-shadow:0 2px 12px rgba(0,0,0,0.15) !important;
-    border-radius:8px !important;
+    width:260mm !important;
+    height:96mm !important;
+    flex-shrink:0 !important;
+    box-shadow:0 1px 6px rgba(0,0,0,0.2) !important;
+    border-radius:6px !important;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+    overflow:hidden !important;
+  }
+  .tflag{
+    width:86mm !important;
+    flex-shrink:0 !important;
+  }
+  .tflag img{
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+    width:100% !important;
+    height:100% !important;
+  }
+  /* Scale text up */
+  .t-evtname{font-size:19px !important;}
+  .t-sub{font-size:8.5px !important;letter-spacing:2px !important;}
+  .t-date{font-size:11px !important;}
+  .t-aname{font-size:18px !important;}
+  .t-albl{font-size:7.5px !important;}
+  .t-tp{font-size:9px !important;padding:3px 10px !important;}
+  .t-seat{font-size:10px !important;}
+  .t-vtxt{font-size:10.5px !important;}
+  .t-vcon{font-size:9px !important;}
+  .t-vlbl{font-size:7.5px !important;padding:3px 8px !important;}
+  .t-top{padding:16px 18px 0 !important;}
+  .t-attn{padding:9px 18px !important;}
+  .t-ven{padding:8px 18px !important;}
+  .t-meta{padding:5px 18px !important;}
+  /* Stub */
+  .tstub{
+    width:56mm !important;
     -webkit-print-color-adjust:exact !important;
     print-color-adjust:exact !important;
   }
-  .tflag img,.t-attnbg,.t-attnbg2,.t-bnd,.t-vlbl,.t-tp,.tstub{
+  .s-admit{font-size:13px !important;letter-spacing:4px !important;}
+  .s-qr img{width:100px !important;height:100px !important;}
+  .s-num{font-size:7.5px !important;}
+  .s-badge{font-size:8px !important;padding:3px 10px !important;}
+  /* Color bands */
+  .t-bw,.t-bnd,.t-attnbg,.t-attnbg2,.t-vlbl,.t-tp,.tstub,.stub-d{
     -webkit-print-color-adjust:exact !important;
     print-color-adjust:exact !important;
   }
+  .t-bw{height:7px !important;}
 }
 </style>
 </head>
