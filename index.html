@@ -490,33 +490,57 @@ function drawTicket(d){
       <div class="fl-cb"></div><div class="fl-cw"></div>
       <svg class="fl-ov" viewBox="0 0 220 240" preserveAspectRatio="none"><line x1="0" y1="0" x2="149" y2="120" stroke="#000" stroke-width="3.5"/><line x1="0" y1="240" x2="149" y2="120" stroke="#000" stroke-width="3.5"/></svg>
       <svg class="fl-ov" viewBox="0 0 220 240">
-        <polygon points="75,78 79,91 93,91 82,99 86,112 75,104 64,112 68,99 57,91 71,91" fill="#d21034"/>
-        <g transform="translate(47,44)">
-          <rect x="10" y="84" width="36" height="5" rx="1" fill="#b8920a"/>
-          <rect x="7"  y="89" width="42" height="5" rx="1.5" fill="#c8a800"/>
-          <rect x="12" y="79" width="32" height="6" rx="1" fill="#c8a800"/>
-          <ellipse cx="28" cy="62" rx="11" ry="15" fill="#c8a800"/>
-          <path d="M17,70 Q5,78 2,72 Q8,65 17,68Z" fill="#b8920a"/>
-          <path d="M17,75 Q3,86 2,79 Q9,72 17,74Z" fill="#c8a800"/>
-          <path d="M39,60 Q50,52 52,58 Q48,66 39,66Z" fill="#b8920a"/>
-          <path d="M39,65 Q52,62 53,68 Q47,73 39,70Z" fill="#c8a800"/>
-          <path d="M22,47 Q24,38 28,36 Q32,38 34,47 Q31,50 25,50Z" fill="#c8a800"/>
-          <ellipse cx="29" cy="32" rx="9" ry="8" fill="#c8a800"/>
-          <path d="M37,30 Q45,28 44,32 Q40,35 37,34Z" fill="#b8920a"/>
-          <path d="M37,33 Q43,34 42,37 Q39,37 37,35Z" fill="#966e00"/>
-          <circle cx="33" cy="29" r="2.2" fill="#3a2500"/>
-          <circle cx="33.7" cy="28.4" r="0.7" fill="#fff"/>
-          <path d="M24,25 Q22,17 25,16 Q27,22 28,24Z" fill="#c8a800"/>
-          <path d="M28,24 Q27,15 30,14 Q31,21 31,24Z" fill="#b8920a"/>
-          <path d="M31,24 Q32,16 35,17 Q34,23 32,25Z" fill="#c8a800"/>
-          <line x1="24" y1="77" x2="22" y2="83" stroke="#966e00" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="32" y1="77" x2="34" y2="83" stroke="#966e00" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M22,83 Q18,85 16,84" stroke="#966e00" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <path d="M22,83 Q21,87 20,87" stroke="#966e00" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <path d="M34,83 Q38,85 40,84" stroke="#966e00" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <path d="M34,83 Q35,87 36,87" stroke="#966e00" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        </g>
-      </svg>
+  <!-- Red star -->
+  <polygon points="90,118 93.5,129 105.5,129 96,136 99.5,147 90,140 80.5,147 84,136 74.5,129 86.5,129" fill="#d21034"/>
+  <!-- Zimbabwe Soapstone Bird - proper upright eagle on plinth, facing right -->
+  <g transform="translate(55,18)">
+    <!-- Plinth - rectangular stone base, two tiers -->
+    <rect x="14" y="97" width="38" height="7" rx="1" fill="#a07800"/>
+    <rect x="10" y="104" width="46" height="7" rx="1" fill="#b8920a"/>
+    <!-- Legs -->
+    <rect x="24" y="89" width="5" height="10" rx="1" fill="#a07800"/>
+    <rect x="35" y="89" width="5" height="10" rx="1" fill="#a07800"/>
+    <!-- Feet/talons -->
+    <path d="M24,99 L19,101 M24,99 L22,103 M24,99 L26,103" stroke="#8a6400" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path d="M40,99 L35,101 M40,99 L38,103 M40,99 L43,103" stroke="#8a6400" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <!-- Body - upright, proud posture -->
+    <ellipse cx="32" cy="72" rx="13" ry="18" fill="#c8a800"/>
+    <!-- Chest detail -->
+    <ellipse cx="36" cy="76" rx="7" ry="11" fill="#d4b400"/>
+    <!-- Left wing folded against body -->
+    <path d="M19,65 Q10,60 9,70 Q10,82 19,85 Q22,78 20,70Z" fill="#b8920a"/>
+    <!-- Wing feather detail -->
+    <path d="M11,65 Q14,72 12,78" stroke="#a07800" stroke-width="1" fill="none"/>
+    <path d="M13,63 Q16,70 14,76" stroke="#a07800" stroke-width="1" fill="none"/>
+    <!-- Right wing slightly raised -->
+    <path d="M45,63 Q56,55 58,64 Q56,76 45,80 Q44,72 46,66Z" fill="#b8920a"/>
+    <path d="M55,60 Q52,68 54,74" stroke="#a07800" stroke-width="1" fill="none"/>
+    <path d="M57,63 Q54,70 56,76" stroke="#a07800" stroke-width="1" fill="none"/>
+    <!-- Neck -->
+    <path d="M25,55 Q28,44 32,42 Q36,44 39,55 Q36,58 28,58Z" fill="#c8a800"/>
+    <!-- Head - eagle-like, proud -->
+    <ellipse cx="34" cy="35" rx="11" ry="10" fill="#c8a800"/>
+    <!-- Curved eagle beak pointing right/down - distinctive -->
+    <path d="M44,33 Q52,31 53,36 Q50,40 44,38Z" fill="#b8920a"/>
+    <path d="M44,37 Q50,38 49,42 Q46,42 44,39Z" fill="#966e00"/>
+    <!-- Eye - bold -->
+    <circle cx="40" cy="31" r="2.8" fill="#2a1800"/>
+    <circle cx="41" cy="30" r="1" fill="#fff"/>
+    <!-- Brow ridge / eyebrow -->
+    <path d="M37,28 Q41,26 44,28" stroke="#a07800" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Crest feathers on top of head -->
+    <path d="M28,27 Q25,18 27,15 Q30,20 30,26Z" fill="#c8a800"/>
+    <path d="M32,25 Q30,15 33,12 Q35,18 34,25Z" fill="#b8920a"/>
+    <path d="M36,26 Q36,17 39,15 Q39,21 37,26Z" fill="#c8a800"/>
+    <!-- Tail feathers at bottom of body -->
+    <path d="M19,84 Q14,92 12,90 Q14,83 19,82Z" fill="#b8920a"/>
+    <path d="M20,87 Q15,96 13,95 Q15,87 20,86Z" fill="#c8a800"/>
+    <!-- Body feather detail lines -->
+    <path d="M26,68 Q32,66 38,68" stroke="#b8920a" stroke-width="1" fill="none"/>
+    <path d="M24,74 Q32,71 40,74" stroke="#b8920a" stroke-width="1" fill="none"/>
+    <path d="M25,80 Q32,77 39,80" stroke="#b8920a" stroke-width="1" fill="none"/>
+  </g>
+</svg>
     </div>
     <div class="tbody">
       <div class="t-bw top"><div class="t-bnd" style="background:#009a44;flex:2;"></div><div class="t-bnd" style="background:#fce300;"></div><div class="t-bnd" style="background:#d21034;"></div><div class="t-bnd" style="background:#000;"></div><div class="t-bnd" style="background:#d21034;"></div><div class="t-bnd" style="background:#fce300;"></div></div>
@@ -524,7 +548,7 @@ function drawTicket(d){
       <div class="t-top"><div class="t-evtname">Zimbabwe<br>Independence<br>Celebrations</div><div class="t-subrow"><span class="t-sub">Awards Ceremony</span><span class="t-dot"></span><span class="t-sub">Nanjing</span></div><div class="t-date">26 MARCH 2026</div></div>
       <div class="t-attn"><div class="t-ab2"></div><div class="t-ab"></div><div class="t-ai"><span class="t-albl">Attendee</span><span class="t-aname">${d.name}</span></div></div>
       <div class="t-meta"><span class="t-tp ${cls}">${d.type||'General'}</span>${d.seat?`<span class="t-seat">📍 ${d.seat}</span>`:''}</div>
-      <div class="t-ven"><span class="t-vlbl">Venue</span><div><div class="t-vtxt">全季酒店(南京雨花台区凤汇大道店) · No.21 Fenghui Ave, Tower A Floor 1, Yuhuatai District, Nanjing</div>${d.email||d.phone?`<div class="t-vcon">${[d.email,d.phone?'Phone: '+d.phone:''].filter(Boolean).join(' · ')}</div>`:''}</div></div>
+      <div class="t-ven"><span class="t-vlbl">Venue</span><div><div class="t-vtxt">全季酒店(南京雨花台区凤汇大道店) 雨花台区凤汇大道21号凤汇壹品大厦A座1层</div><div class="t-vcon">No.21 Fenghui Ave, Tower A Floor 1, Fenghui Yipin Plaza, Yuhuatai District, Nanjing</div>${d.email||d.phone?`<div class="t-vcon">${[d.email,d.phone?'Phone: '+d.phone:''].filter(Boolean).join(' · ')}</div>`:''}</div></div>
       <div class="t-bw bot"><div class="t-bnd" style="background:#009a44;flex:2;"></div><div class="t-bnd" style="background:#fce300;"></div><div class="t-bnd" style="background:#d21034;"></div><div class="t-bnd" style="background:#000;"></div><div class="t-bnd" style="background:#d21034;"></div><div class="t-bnd" style="background:#fce300;"></div></div>
     </div>
     <div class="tstub ${cls}"><div class="stub-d"></div><span class="s-badge">Admit</span><div class="s-mid"><span class="s-admit">Admit one</span><div class="s-qr" id="qr-${d.id}"></div></div><div class="s-num">NO: TKT-<br>${s}</div></div>
